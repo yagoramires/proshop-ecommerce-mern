@@ -8,7 +8,7 @@ const Product = ({ product }) => {
     <li>
       <Link
         href={`/product/${product._id}`}
-        className='flex flex-col gap-2 bg-zinc-950 h-[350px] shadow-md pb-2'
+        className='flex flex-col gap-2 bg-zinc-950 hover:bg-zinc-900 h-[350px] shadow-md pb-2 transition-all duration-200'
       >
         <Image
           src={product.image}
@@ -16,8 +16,11 @@ const Product = ({ product }) => {
           height={500}
           className='w-full'
           alt={product.name}
+          priority
         />
-        <h2 className='text-lg px-2 flex-1 font-bold'>{product.name}</h2>
+        <h2 className='text-lg px-2 flex-1 font-bold max-w-[30ch] overflow-hidden text-ellipsis whitespace-nowrap'>
+          {product.name}
+        </h2>
         <Rating value={product.rating} text={`${product.rating} Avaliações`} />
         <h3 className='text-sm px-2 '>
           {product.price.toLocaleString('pt-BR', {

@@ -1,4 +1,4 @@
-import Product from '@/components/Product';
+import ProductCard from '@/components/ProductCard';
 import products from '@/products';
 
 export default function Home() {
@@ -8,7 +8,7 @@ export default function Home() {
 
       <ul className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 w-full justify-items-stretch gap-4'>
         {products.map((product) => (
-          <Product product={product} />
+          <ProductCard product={product} />
         ))}
       </ul>
     </main>

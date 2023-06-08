@@ -14,7 +14,9 @@ const Header = () => {
   return (
     <header className='bg-zinc-900 text-white'>
       <nav className='mx-auto h-[50px] w-full lg:max-w-[1280px] flex items-center justify-between shadow-md'>
-        <h2 className='font-bold text-xl pl-4'>Proshop</h2>
+        <Link href='/' className='font-bold text-xl pl-4'>
+          Proshop
+        </Link>
         <ul
           className={`absolute top-[50px] w-full bg-zinc-900 shadow-md lg:shadow-none ${
             showMenu ? 'flex' : 'hidden lg:flex'

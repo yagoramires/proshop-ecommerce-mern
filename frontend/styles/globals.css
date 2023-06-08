@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+ @apply bg-zinc-800 text-white
+}
+
+.flex-center-row {
+@apply flex items-center justify-center
+}
+
+.flex-center-col {
+  @apply flex flex-col items-center justify-between
+}
+
+.main-layout {
+  @apply p-4 max-w-[1280px] min-h-[calc(100vh-98px)] mx-auto
+} 

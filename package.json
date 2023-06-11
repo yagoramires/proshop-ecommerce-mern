@@ -13,10 +13,12 @@
   "author": "Yago Ramires",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "mongoose": "^7.2.3"
   },
   "devDependencies": {
     "concurrently": "^8.2.0",
+    "dotenv": "^16.1.4",
     "nodemon": "^2.0.22"
   }
 }

@@ -1,7 +1,18 @@
+'use client';
+import { fetchProducts } from '@/api/service';
 import ProductCard from '@/components/ProductCard';
-import products from '@/products';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const data = await fetchProducts();
+      setProducts(data);
+    })();
+  }, []);
+
   return (
     <main className='main-layout'>
       <h1>Latest Products</h1>

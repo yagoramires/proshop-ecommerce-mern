@@ -21,7 +21,12 @@ const Product = ({ product }) => {
         <h2 className='text-lg px-2 flex-1 font-bold max-w-[30ch] overflow-hidden text-ellipsis whitespace-nowrap'>
           {product.name}
         </h2>
-        <Rating value={product.rating} text={`${product.rating} Avaliações`} />
+        <div className='p-2'>
+          <Rating
+            value={product.rating}
+            text={`${product.rating} Avaliações`}
+          />
+        </div>
         <h3 className='text-sm px-2 '>
           {product.price.toLocaleString('pt-BR', {
             style: 'currency',

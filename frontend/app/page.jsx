@@ -1,27 +1,32 @@
 'use client';
-import { fetchProducts } from '@/api/service';
+
+import Loading from '@/components/Loading';
 import ProductCard from '@/components/ProductCard';
-import { useEffect, useState } from 'react';
+import { useGetProductsQuery } from '@/redux/slices/productsApiSlice';
 
 export default function Home() {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    (async () => {
-      const data = await fetchProducts();
-      setProducts(data);
-    })();
-  }, []);
+  const { data: products, isLoading, error } = useGetProductsQuery();
 
   return (
     <main className='main-layout'>
       <h1>Latest Products</h1>
 
-      <ul className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 w-full justify-items-stretch gap-4'>
-        {products.map((product) => (
-          <ProductCard product={product} />
-        ))}
-      </ul>
+      {isLoading ? (
+        <div className='min-h-[80vh] flex justify-center items-center'>
+          <Loading />
+        </div>
+      ) : error ? (
+        <p className='min-h-[80vh] flex justify-center items-center'>
+          {' '}
+          {error?.data?.message || error?.error}
+        </p>
+      ) : (
+        <ul className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 w-full justify-items-stretch gap-4'>
+          {products?.map((product) => (
+            <ProductCard key={product._id} product={product} />
+          ))}
+        </ul>
+      )}
     </main>
   );
 }

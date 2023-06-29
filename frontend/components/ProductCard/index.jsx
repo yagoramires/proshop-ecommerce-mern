@@ -30,7 +30,7 @@ const Product = ({ product }) => {
         <h3 className='text-sm px-2 '>
           {product.price.toLocaleString('pt-BR', {
             style: 'currency',
-            currency: 'BRL',
+            currency: 'USD',
           })}
         </h3>
       </Link>

@@ -17,3 +17,4 @@ body {
 .main-layout {
   @apply p-4 max-w-[1280px] min-h-[calc(100vh-98px)] mx-auto
 } 
+

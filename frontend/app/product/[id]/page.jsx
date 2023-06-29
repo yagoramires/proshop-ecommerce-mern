@@ -1,13 +1,22 @@
 'use client';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+
+import { useDispatch } from 'react-redux';
+import { useGetProductDetailsQuery } from '@/redux/slices/productsApiSlice';
+import { addToCart } from '@/redux/slices/cartSlice';
+
 import Loading from '@/components/Loading';
 import Rating from '@/components/Rating';
-import { useGetProductDetailsQuery } from '@/redux/slices/productsApiSlice';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import { MdKeyboardArrowLeft } from 'react-icons/md';
 
 const ProductScreen = ({ params }) => {
   const productId = params.id;
+  const router = useRouter();
+  const dispatch = useDispatch();
+
+  const [qty, setQty] = useState(1);
 
   const {
     data: product,
@@ -15,7 +24,10 @@ const ProductScreen = ({ params }) => {
     error,
   } = useGetProductDetailsQuery(productId);
 
-  const router = useRouter();
+  const addToCartHandler = () => {
+    dispatch(addToCart({ ...product, qty }));
+    router.push('/cart');
+  };
 
   return (
     <main className='main-layout flex flex-col justify-center items-center'>
@@ -58,7 +70,7 @@ const ProductScreen = ({ params }) => {
                 <p>
                   {product?.price.toLocaleString('pt-BR', {
                     style: 'currency',
-                    currency: 'BRL',
+                    currency: 'USD',
                   })}
                 </p>
               </div>
@@ -66,7 +78,28 @@ const ProductScreen = ({ params }) => {
                 <p>Status:</p>
                 <p>{product?.countInStock > 0 ? 'Em estoque' : 'Esgotado'}</p>
               </div>
-              <button className='bg-zinc-900 rounded-md p-2 hover:bg-blue-500 transition-all duration-150'>
+              {product?.countInStock > 0 && (
+                <form className='flex items-center justify-between border-b-[1px] border-zinc-800'>
+                  <p>Quantity:</p>
+                  <div className='flex pb-2'>
+                    <select
+                      value={qty}
+                      onChange={(e) => setQty(Number(e.target.value))}
+                      className='bg-zinc-700 px-4 rounded-sm'
+                    >
+                      {[...Array(product.countInStock).keys()].map((x) => (
+                        <option key={x + 1} value={x + 1}>
+                          {x + 1}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </form>
+              )}
+              <button
+                onClick={addToCartHandler}
+                className='bg-zinc-900 rounded-md p-2 hover:bg-blue-500 transition-all duration-150'
+              >
                 Adicionar ao carrinho
               </button>
             </div>
@@ -81,7 +114,7 @@ const ProductScreen = ({ params }) => {
               <p>
                 {product?.price.toLocaleString('pt-BR', {
                   style: 'currency',
-                  currency: 'BRL',
+                  currency: 'USD',
                 })}
               </p>
             </div>

@@ -1,11 +1,15 @@
 'use client';
 import Link from 'next/link';
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+
 import { FaUser, FaShoppingCart } from 'react-icons/fa';
 import { GiHamburgerMenu } from 'react-icons/gi';
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
+  const { cartItems } = useSelector((state) => state.cart);
+  console.log();
 
   const handleMenu = () => {
     setShowMenu(!showMenu);
@@ -23,9 +27,16 @@ const Header = () => {
           } flex-col items-start p-4 lg:static lg:bg-transparent lg:flex-row lg:w-auto gap-4 text-sm`}
         >
           <li>
-            <Link href='/' className='flex-center-row gap-[4px]'>
+            <Link href='/cart' className='flex-center-row gap-[4px]'>
               <FaShoppingCart />
-              <span>Cart</span>
+              <span className='flex'>
+                Cart
+                {cartItems.length > 0 && (
+                  <span className='ml-2 bg-zinc-500 rounded-full w-5 h-5 flex justify-center items-center'>
+                    {cartItems.reduce((a, c) => a + c.qty, 0)}
+                  </span>
+                )}
+              </span>
             </Link>
           </li>
           <li>

@@ -39,14 +39,14 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 // @desc Get all users
 // @route GET /api/users/
 // @access Private/Admin
-const getAllUsers = asyncHandler(async (req, res) => {
+const getUsers = asyncHandler(async (req, res) => {
   res.send('update user profile');
 });
 
 // @desc Get user by id
 // @route GET /api/users/:id
 // @access Private/Admin
-const getUser = asyncHandler(async (req, res) => {
+const getUserByID = asyncHandler(async (req, res) => {
   res.send('delete user');
 });
 
@@ -56,3 +56,14 @@ const getUser = asyncHandler(async (req, res) => {
 const deleteUser = asyncHandler(async (req, res) => {
   res.send('delete user');
 });
+
+export {
+  authUser,
+  registerUser,
+  logoutUser,
+  getUserProfile,
+  updateUserProfile,
+  getUsers,
+  getUserByID,
+  deleteUser,
+};

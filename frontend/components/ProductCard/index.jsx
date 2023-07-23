@@ -10,14 +10,16 @@ const Product = ({ product }) => {
         href={`/product/${product._id}`}
         className='flex flex-col gap-2 bg-zinc-950 hover:bg-zinc-900 h-[350px] shadow-md pb-2 transition-all duration-200'
       >
-        <Image
-          src={product.image}
-          width={500}
-          height={500}
-          className='w-full max-h-[200px]'
-          alt={product.name}
-          priority
-        />
+        <div className='bg-white w-full'>
+          <Image
+            src={product.image}
+            width={500}
+            height={500}
+            className='max-h-[200px] object-contain mx-auto'
+            alt={product.name}
+            priority
+          />
+        </div>
         <h2 className='text-lg px-2 flex-1 font-bold max-w-[30ch] overflow-hidden text-ellipsis whitespace-nowrap'>
           {product.name}
         </h2>

@@ -12,6 +12,10 @@ import { errorHandler, notFount } from './middleware/errorMiddleware.js';
 const app = express();
 const port = process.env.PORT;
 
+// Body parser middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.header(

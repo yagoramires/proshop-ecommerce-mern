@@ -14,6 +14,7 @@ const cartSlice = createSlice({
   reducers: {
     addToCart: (state, action) => {
       const item = action.payload;
+      console.log(state.cartItems);
 
       // Check if product is in the cart
       const existItem = state.cartItems.find((x) => x._id === item._id);
@@ -26,6 +27,7 @@ const cartSlice = createSlice({
       } else {
         state.cartItems = [...state.cartItems, item];
       }
+      console.log(state.cartItems);
 
       return updateCart(state);
     },

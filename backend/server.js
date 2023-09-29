@@ -1,6 +1,7 @@
 import express from 'express';
 import productRoutes from './routes/productRoutes.js';
 import userRoutes from './routes/userRoutes.js';
+import cookieParser from 'cookie-parser';
 
 import dotenv from 'dotenv';
 dotenv.config();
@@ -15,6 +16,9 @@ const port = process.env.PORT;
 // Body parser middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Cookie parser middleware
+app.use(cookieParser());
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
